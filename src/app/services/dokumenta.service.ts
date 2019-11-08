@@ -8,6 +8,8 @@ import { Dokument } from '../interface/Dokumenta';
 export class DokumentaService {
 
   constructor(private _http: HttpClient) { }
+  
+
 
   allDokumenta(){
     return this._http.get<Dokument[]>("http://localhost:8080/dokument/all")

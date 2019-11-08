@@ -10,12 +10,18 @@ import { DokumentaComponent } from './dokumenta/dokumenta.component';
 import { MaterialModule } from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { KorisniciComponent } from './korisnici/korisnici.component';
+import { PredmetiComponent } from './predmeti/predmeti.component';
+import { UceniciComponent } from './ucenici/ucenici.component';
+import { NastavniciComponent } from './nastavnici/nastavnici.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DokumentaComponent,
-    KorisniciComponent
+    KorisniciComponent,
+    PredmetiComponent,
+    UceniciComponent,
+    NastavniciComponent
   ],
   imports: [
     BrowserModule,
