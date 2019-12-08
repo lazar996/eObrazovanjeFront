@@ -1,13 +1,27 @@
 
+<mat-toolbar color="primary">
 
+  <button *ngIf="role!='nastavnik'" mat-button routerLink="/dokumenta" color="white">Dokumenti</button>
 
-  <button  mat-button routerLink="/dokumenta" color="accent">Dokumenti</button>
-
-  <button  mat-button routerLink="/korisnici" color="accent">korisnici</button>
+  <button    mat-button routerLink="/korisnici" color="white">Korisnici</button>
   
-  <button  mat-button routerLink="/predmeti" color="accent">predmeti</button>
+  <button    mat-button routerLink="/predmeti" color="white">Predmeti</button>
 
-  <button  mat-button routerLink="/ucenici" color="accent">ucenici</button>
+  <button  mat-button routerLink="/ucenici" color="white">Ucenici</button>
 
-  <button  mat-button routerLink="/nastavnici" color="accent">nastavnici</button>
-<router-outlet></router-outlet>
+  <button mat-button routerLink="/nastavnici" color="white">Nastavnici</button>
+
+
+  <span class="fil-space"></span>
+  <p>{{currentUser?.username}}</p>
+  &nbsp;&nbsp;
+<button *ngIf="!loggedIn" mat-raised-button color="white" (click)="openLoginDialog()" >  Login</button>
+<button *ngIf="loggedIn" mat-raised-button color="white" [matMenuTriggerFor]="menu">Opcije</button>
+<mat-menu  #menu="matMenu">
+<button  mat-button color="primary" (click)="promenaLozinke()">Promena lozinke</button>
+<br>
+<button  mat-button color="primary" (click)="odjava()">Odjava</button>
+</mat-menu>
+
+</mat-toolbar>
+  <router-outlet></router-outlet>

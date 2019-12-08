@@ -12,6 +12,6 @@ export class DokumentaService {
 
 
   allDokumenta(){
-    return this._http.get<Dokument[]>("http://localhost:8080/dokument/all")
+    return this._http.get<Dokument[]>("http://localhost:8080/api/dokumenta")
   }
 }

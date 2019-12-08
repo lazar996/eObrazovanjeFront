@@ -11,6 +11,6 @@ export class UceniciService {
 
   allUcenici(){
 
-    return this._http.get<Ucenici[]>("http://localhost:8080/api/ucenik/1")
+    return this._http.get<Ucenici[]>("http://localhost:8080/api/ucenici")
   }
 }

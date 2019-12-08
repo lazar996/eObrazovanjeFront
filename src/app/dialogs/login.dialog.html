@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Login</h1>
+<form #loginForm="ngForm" (submit)="forumSubmit(loginForm.value)">
+    <div mat-dialog-content>
+        <mat-form-field style="width:100%;">
+            <input type="text" matInput name="username" placeholder="Korisnicko ime"
+                ngModel>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field style="width:100%;">
+            <input type="password" matInput name="password" placeholder="Lozinka" ngModel>
+        </mat-form-field>
+        <br>
+    </div>
+    <div mat-dialog-actions>
+
+
+        <button type="submit" [disabled]="!loginForm.valid" color="primary" mat-flat-button>
+            Login
+        </button>
+        <span style="flex: 1 1 auto;"></span>
+        <button type="button" mat-button (click)="onNoClick()">Odustani</button>
+
+    </div>
+</form>

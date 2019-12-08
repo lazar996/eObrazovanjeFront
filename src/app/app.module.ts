@@ -13,7 +13,9 @@ import { KorisniciComponent } from './korisnici/korisnici.component';
 import { PredmetiComponent } from './predmeti/predmeti.component';
 import { UceniciComponent } from './ucenici/ucenici.component';
 import { NastavniciComponent } from './nastavnici/nastavnici.component';
-
+import { LoginDialog} from './dialogs/login.dialog';
+import { PasswordDialog} from './dialogs/password.dialog';
+import { TokenInterceptorService } from './security/token-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,17 +23,25 @@ import { NastavniciComponent } from './nastavnici/nastavnici.component';
     KorisniciComponent,
     PredmetiComponent,
     UceniciComponent,
-    NastavniciComponent
+    NastavniciComponent,
+    LoginDialog,
+    PasswordDialog
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
-  providers:[DokumentaService,HttpClient],
+  entryComponents:[LoginDialog
+    ,PasswordDialog],
+  providers:[DokumentaService,HttpClient,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
