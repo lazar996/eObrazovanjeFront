@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NastavniciService } from '../services/nastavnici.service';
+import { KorisniciService } from '../services/korisnici.service';
 import { Nastavnici } from '../interface/nastavnici';
+import { SnackBarService } from '../services/snack-bar.service';
 import { error } from '@angular/compiler/src/util';
-
+import {NastavnikDialog} from '../dialogs/nastavnik.dialog'
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-nastavnici',
@@ -11,12 +14,30 @@ import { error } from '@angular/compiler/src/util';
 })
 export class NastavniciComponent implements OnInit {
 
-  constructor(private nastavniciService: NastavniciService) { }
+  constructor(private nastavniciService: NastavniciService, 
+              private korisniciService: KorisniciService,
+              private dialog:MatDialog,
+              private snackBarService:SnackBarService) { }
   nastavnici: Nastavnici[];
   ngOnInit() {
 
     this.ucitavanjeNastavnika();
   }
+
+  openNastDialog(mode,student:Nastavnici = <Nastavnici>{}):void{
+    const dialogRef = this.dialog.open(NastavnikDialog,{
+      width:'400px',
+      data: {mode:mode,nastavnik:student}
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      if(result=="success"){
+        this.loadNastavnici();
+      }
+    });
+  }
+
+
 
   ucitavanjeNastavnika(){
 
@@ -29,6 +50,27 @@ export class NastavniciComponent implements OnInit {
       },
       error => console.error(error)
     )
+  }
+
+  loadNastavnici(){
+    this.korisniciService.getNastavnici().subscribe(
+      success=> {
+        this.nastavnici = success;
+      }, error => {
+        console.log("Ucitavanje nije uspelo!")
+      }
+    )
+  }
+
+  deleteNastavnik(nastavnici:Nastavnici){
+    {
+      this.korisniciService.deleteNastavnik(nastavnici.jmbg).subscribe(
+        success=>{this.loadNastavnici();
+          this.snackBarService.openSnackBar("Nastavnik uspesno izbrisan","Delete")
+        },
+        error=>this.snackBarService.openSnackBar("Problem sa brisanjem nastavnika!","Problem!")
+      )
+    }
   }
   }
 

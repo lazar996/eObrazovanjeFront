@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Nastavnik</h1>
+<form #nastavnikForm="ngForm" (submit)="forumSubmit(nastavnikForm.value)">
+    <div mat-dialog-content>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="korisnickoIme" placeholder="Korisnicko ime" [ngModel]="nastavnik.korisnickoIme">
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="ime" placeholder="Ime" [ngModel]="nastavnik.ime">
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="prezime" placeholder="Prezime" [ngModel]="nastavnik.prezime">
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="email" placeholder="Email" [ngModel]="nastavnik.email">
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="mode=='add'" style="width:100%;">
+                <input  *ngIf="mode=='add'" type="password" matInput name="lozinka" placeholder="Lozinka" [ngModel]="nastavnik.lozinka">
+            </mat-form-field>
+            <br *ngIf="mode=='edit' || mode=='add'">
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="ulica" placeholder="Ulica i broj" [ngModel]="nastavnik.ulica">
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="grad" placeholder="Grad" [ngModel]="nastavnik.grad">
+            </mat-form-field>
+            <br>  
+            <mat-form-field style="width:100%;">
+                    <input [readonly]="mode=='view'" matInput name="broj" placeholder="Broj Telefona" [ngModel]="nastavnik.broj">
+                </mat-form-field>
+                <br>
+            <mat-form-field style="width:100%;">
+                <input [readonly]="mode=='view'" matInput name="zvanje" placeholder="Zvanje" [ngModel]="nastavnik.zvanje">
+            </mat-form-field>
+            <br>
+        <br>
+
+
+    </div>
+    <div mat-dialog-actions>
+
+
+        <button type="submit" [disabled]="mode=='view' || !nastavnikForm.valid" color="primary" mat-flat-button>
+            Potvrdi
+        </button>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-button (click)="onNoClick()">Odustani</button>
+
+    </div>
+</form>

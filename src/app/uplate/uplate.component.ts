@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UplataService } from '../services/uplata.service';
+import { Uplata } from '../interface/uplata';
 
 @Component({
   selector: 'app-uplate',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UplateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private uplateService: UplataService) { }
 
+
+  uplate: Uplata[];
   ngOnInit() {
+
+    this.ucitavanjeUplata();
+    
+  }
+
+
+  ucitavanjeUplata(){
+
+      this.uplateService.allUplate().subscribe(
+        success => {
+
+          this.uplate = success;
+        },
+
+        error => console.log(error)
+      )
+
   }
 
 }

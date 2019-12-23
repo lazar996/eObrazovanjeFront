@@ -15,4 +15,12 @@ export class NastavniciService {
 
     return this._http.get<Nastavnici[]>("http://localhost:8080/api/nastavnici")
   }
+
+  uploadNastavnik(nastavnik:Nastavnici,mode:string){
+    if(mode=="add"){
+      return this._http.post("http://localhost:8080/api/nastavnici",nastavnik);
+    } else {
+      return this._http.put("http://localhost:8080/api/nastavnici",nastavnik);
+    }
+  }
 }

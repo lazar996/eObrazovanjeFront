@@ -16,6 +16,11 @@ import { NastavniciComponent } from './nastavnici/nastavnici.component';
 import { LoginDialog} from './dialogs/login.dialog';
 import { PasswordDialog} from './dialogs/password.dialog';
 import { TokenInterceptorService } from './security/token-interceptor.service';
+import { PredmetDialog } from './predmeti/predmet.dialog';
+import { NastavnikDialog } from './dialogs/nastavnik.dialog';
+import { UcenikDialog } from './dialogs/ucenik.dialog';
+import { DokumentDialog } from './dialogs/dokument.dialog';
+import { UplateComponent } from './uplate/uplate.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +29,13 @@ import { TokenInterceptorService } from './security/token-interceptor.service';
     PredmetiComponent,
     UceniciComponent,
     NastavniciComponent,
+    UplateComponent,
     LoginDialog,
-    PasswordDialog
+    PasswordDialog,
+    PredmetDialog,
+    NastavnikDialog,
+    UcenikDialog,
+    DokumentDialog
   ],
   imports: [
     BrowserModule,
@@ -36,7 +46,7 @@ import { TokenInterceptorService } from './security/token-interceptor.service';
     FormsModule
   ],
   entryComponents:[LoginDialog
-    ,PasswordDialog],
+    ,PasswordDialog,PredmetDialog,NastavnikDialog,UcenikDialog,DokumentDialog],
   providers:[DokumentaService,HttpClient,{
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,

@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Novi dokument</h1>
+<form #documentUploadForm="ngForm" (ngSubmit)="documentUploadFunction(documentUploadForm.value)">
+    <div mat-dialog-content>
+        <div ngModelGroup="dokument">
+            <mat-form-field readonly="mode=='view'" style="width:100%;">
+                <mat-select name="brojIndeksa" ngModel placeholder="Izaberi Ucenika" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let ucenik of ucenici" [value]="ucenik.brojIndeksa">
+                        {{ucenik.ime}} {{ucenik.prezime}} {{ucenik.brojIndeksa}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="width:100%;">
+                <input matInput name="naziv" placeholder="Naziv dokumenta" ngModel>
+            </mat-form-field>
+            <br>
+            <mat-form-field style="width:100%;">
+                <input matInput name="tipDokumenta" placeholder="Opis dokumenta" ngModel>
+            </mat-form-field>
+        </div>
+        <button mat-button (click)="fileInput.click()">
+            <mat-icon>delete</mat-icon>
+            <span>Izaberi fajl </span>
+            <input #fileInput type="button" name="file" type="file" (change)="onFileInput($event.target.files)"
+                style="display:none;" ngModel />
+        </button>
+        <br>
+
+
+    </div>
+    <div mat-dialog-actions>
+
+
+        <button type="submit" color="primary" mat-flat-button>
+            Dodaj
+        </button>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-button type="button" (click)="onNoClick()">Odustani</button>
+
+    </div>
+</form>

@@ -7,3 +7,10 @@ h2{
   text-align: center;
  font-family: 'Times New Roman', Times, serif;
 }
+
+.margin-left{
+  margin-left: 55px !important;
+}
+.margin-right{
+  margin-left: 80px !important;
+}

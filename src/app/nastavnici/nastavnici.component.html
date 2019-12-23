@@ -1,12 +1,22 @@
 <mat-list class="container">
-    <h3 mat-subheader>nastavnik</h3>
+    
+        <button class="margin-left" mat-flat-button color="primary" (click)="openNastDialog('add')">Novi nastavnik</button>   
     <mat-list-item *ngFor="let nastavnik of nastavnici">
-            <br>
-            <br>
-    <h4 mat-line><p>Zvanje</p>
-        {{nastavnik.zvanje}}</h4>
+        <mat-icon mat-list-icon>
+            assignment_ind
+        </mat-icon>
+        <h4 mat-line>{{nastavnik.ime}} {{nastavnik.prezime}}</h4>
+        <p mat-line>{{nastavnik.zvanje}}</p>
+
+        <span class="example-spacer"></span>
     
-   
+        <button mat-icon-button color="primary">
+            <mat-icon aria-label="Example icon-button with a heart icon" (click)="openNastDialog('edit',nastavnik)">edit
+            </mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon aria-label="Example icon-button with a heart icon" (click)="deleteNastavnik(nastavnik)">delete
+            </mat-icon>
+        </button>
     </mat-list-item>
-    </mat-list>
-    
+</mat-list>

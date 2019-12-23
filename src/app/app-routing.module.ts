@@ -5,6 +5,7 @@ import { KorisniciComponent } from './korisnici/korisnici.component';
 import { PredmetiComponent } from './predmeti/predmeti.component';
 import { UceniciComponent } from './ucenici/ucenici.component';
 import { NastavniciComponent } from './nastavnici/nastavnici.component';
+import { UplateComponent } from './uplate/uplate.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'korisnici', component: KorisniciComponent},
   {path: 'predmeti', component: PredmetiComponent},
   {path: 'ucenici', component: UceniciComponent},
-  {path: 'nastavnici', component: NastavniciComponent}
+  {path: 'nastavnici', component: NastavniciComponent},
+  {path: 'uplate', component: UplateComponent}
 ];
 
 @NgModule({
