@@ -6,6 +6,7 @@ import { KorisniciService } from '../services/korisnici.service';
 import { SnackBarService } from '../services/snack-bar.service';
 import { MatDialog } from '@angular/material';
 import { UcenikDialog } from '../dialogs/ucenik.dialog';
+import { AuthenticationService } from '../security/authentication.service';
 
 @Component({
   selector: 'app-ucenici',
@@ -17,17 +18,24 @@ export class UceniciComponent implements OnInit {
   constructor(private _http: HttpClient,
     private korisniciService: KorisniciService,
     private uceniciService: UceniciService,
-    private snackBarService:SnackBarService,
-    private dialog:MatDialog,) { }
-    
-    
-    ucenici: Ucenici[];
+    private snackBarService: SnackBarService,
+    private dialog: MatDialog,
+    private authService: AuthenticationService) { }
+
+
+  ucenici: Ucenici[];
+  loggedIn: boolean = false;
+  role: string;
 
   ngOnInit() {
-    this.ucitavanjeUcenika();
+    this.loggedIn = this.authService.isLoggedIn();
+    this.role = this.authService.getRole();
+    if (this.role != "ucenik") {
+      this.ucitavanjeUcenika();
+    }
   }
 
-  ucitavanjeUcenika(){
+  ucitavanjeUcenika() {
 
     this.uceniciService.allUcenici().subscribe(
 
@@ -38,41 +46,42 @@ export class UceniciComponent implements OnInit {
         console.log(this.ucenici)
       },
       error => console.error(error)
-      
+
     )
   }
 
-  loadUcenici(){
+  loadUcenici() {
     this.korisniciService.getUcenici().subscribe(
-      success=> {
+      success => {
         this.ucenici = success;
       }, error => {
         console.log("Ucitavanje nije uspelo!")
       }
     )
   }
-  deleteStudent(ucenici:Ucenici){
-    
-      this.uceniciService.deleteStudent(ucenici.jmbg).subscribe(
-        success=>{this.loadUcenici();
-          this.snackBarService.openSnackBar("Nastavnik uspesno izbrisan","ok")
-        },
-        error=>this.snackBarService.openSnackBar("Problem sa brisanjem nastavnika!","ok")
-      )
-    }
+  deleteUcenik(ucenici: Ucenici) {
 
-    openUcenikDialog(mode,ucenik:Ucenici = <Ucenici>{}):void{
-      const dialogRef = this.dialog.open(UcenikDialog,{
-        width:'400px',
-        data: {mode:mode,ucenik:ucenik}
-      });
-  
-      dialogRef.afterClosed().subscribe(result=>{
-        if(result=="success"){
-          this.ngOnInit();
-        }
-      });
-    }
+    this.uceniciService.deleteUcenik(ucenici.jmbg).subscribe(
+      success => {
+        this.loadUcenici();
+        this.snackBarService.openSnackBar("Ucenik je uspesno obrisan", "ok")
+      },
+      error => this.snackBarService.openSnackBar("Problem sa brisanjem ucenika!", "ok")
+    )
   }
+
+  openUcenikDialog(mode, ucenik: Ucenici = <Ucenici>{}): void {
+    const dialogRef = this.dialog.open(UcenikDialog, {
+      width: '400px',
+      data: { mode: mode, ucenik: ucenik }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "success") {
+        this.ngOnInit();
+      }
+    });
+  }
+}
 
 

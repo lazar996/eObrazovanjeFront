@@ -1,8 +1,11 @@
 export interface Uplata {
-    id:number,
-    datumUplate:Date,
+    uplataId:number,
+    datumUplate:Date, 
     svrhaUplate:string,
     iznos:number,
     brojIndeksa:string,
-    imePrezime:string
+    imePrezime: string
+    
+   
+    
 }

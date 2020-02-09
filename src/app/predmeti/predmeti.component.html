@@ -1,6 +1,7 @@
+<div *ngIf="loggedIn">
 <mat-list class="container">
-  <br>
-    <button mat-flat-button class= "margin-left" color="primary" (click)="openDialog('add')">  Novi predmet</button>
+
+    <button *ngIf="role=='administrator'" mat-flat-button class= "margin-left" color="primary" (click)="openDialog('add')">  Novi predmet</button>
   <mat-list-item *ngFor="let predmet of  predmeti">
     <mat-icon mat-list-icon>
       library_books
@@ -8,11 +9,11 @@
     <span class="example-spacer"></span>
     <h4 mat-line>{{predmet.naziv}}</h4>
     <p mat-line>{{predmet.opis}}</p>
-    <button mat-icon-button color="primary">
-      <mat-icon aria-label="Example icon-button with a heart icon" (click)="openDialog('edit',predmet)">edit</mat-icon>
+    <button  *ngIf="role=='administrator'" mat-icon-button color="primary">
+      <mat-icon  aria-label="Example icon-button with a heart icon" (click)="openDialog('edit',predmet)">edit</mat-icon>
     </button>
-    <button mat-icon-button color="primary">
-      <mat-icon aria-label="Example icon-button with a heart icon" (click)="deletePredmet(predmet)">delete
+    <button *ngIf="role=='administrator'" mat-icon-button color="primary">
+      <mat-icon  aria-label="Example icon-button with a heart icon" (click)="deletePredmet(predmet)">delete
       </mat-icon>
     </button>
   
@@ -20,3 +21,20 @@
 
   </mat-list-item>
 </mat-list>
+
+
+<mat-list class="container">
+  <mat-list-item *ngFor="let predmet of  predmetiKojePohadja">
+    <mat-icon mat-list-icon>
+      library_books
+    </mat-icon>
+    <span class="example-spacer"></span>
+    <h4 mat-line>{{predmet.naziv}}</h4>
+    <p mat-line>{{predmet.opis}}</p>
+  </mat-list-item>
+</mat-list>
+</div>
+
+<div *ngIf="!loggedIn">
+  morate biti ulogavani
+</div>

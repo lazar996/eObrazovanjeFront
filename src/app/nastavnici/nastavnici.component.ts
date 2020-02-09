@@ -6,6 +6,7 @@ import { SnackBarService } from '../services/snack-bar.service';
 import { error } from '@angular/compiler/src/util';
 import {NastavnikDialog} from '../dialogs/nastavnik.dialog'
 import { MatDialog } from '@angular/material';
+import { AuthenticationService } from '../security/authentication.service';
 
 @Component({
   selector: 'app-nastavnici',
@@ -17,17 +18,23 @@ export class NastavniciComponent implements OnInit {
   constructor(private nastavniciService: NastavniciService, 
               private korisniciService: KorisniciService,
               private dialog:MatDialog,
-              private snackBarService:SnackBarService) { }
+              private snackBarService:SnackBarService,
+              private authService: AuthenticationService) { }
+
   nastavnici: Nastavnici[];
+  loggedIn: boolean = false;
+  role: string;
   ngOnInit() {
-
+    this.loggedIn = this.authService.isLoggedIn();
+    this.role = this.authService.getRole();
+    if(this.role != "ucenik" && this.role != "nastavnik"){
     this.ucitavanjeNastavnika();
-  }
+  }}
 
-  openNastDialog(mode,student:Nastavnici = <Nastavnici>{}):void{
+  openNastDialog(mode,nastavnik:Nastavnici = <Nastavnici>{}):void{
     const dialogRef = this.dialog.open(NastavnikDialog,{
       width:'400px',
-      data: {mode:mode,nastavnik:student}
+      data: {mode:mode,nastavnik:nastavnik}
     });
 
     dialogRef.afterClosed().subscribe(result=>{

@@ -2,7 +2,7 @@
 <form #documentUploadForm="ngForm" (ngSubmit)="documentUploadFunction(documentUploadForm.value)">
     <div mat-dialog-content>
         <div ngModelGroup="dokument">
-            <mat-form-field readonly="mode=='view'" style="width:100%;">
+            <mat-form-field readonly="mode=='view'" *ngIf="role=='administrator'" style="width:100%;">
                 <mat-select name="brojIndeksa" ngModel placeholder="Izaberi Ucenika" required>
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let ucenik of ucenici" [value]="ucenik.brojIndeksa">
@@ -19,7 +19,7 @@
             </mat-form-field>
         </div>
         <button mat-button (click)="fileInput.click()">
-            <mat-icon>delete</mat-icon>
+            <mat-icon>note_add</mat-icon>
             <span>Izaberi fajl </span>
             <input #fileInput type="button" name="file" type="file" (change)="onFileInput($event.target.files)"
                 style="display:none;" ngModel />

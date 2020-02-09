@@ -1,8 +1,11 @@
+
 <h1 mat-dialog-title>Novi predmet</h1>
+
 <form #predmetForm="ngForm" (ngSubmit)="submitForm(predmetForm.value)">
     <div mat-dialog-content>
         <mat-form-field style="width:100%;">
-            <input [readonly]="mode=='view'" matInput name="naziv" placeholder="Naziv predmeta" [ngModel]="predmet.naziv">
+            <input [readonly]="mode=='view'" matInput name="naziv" placeholder="Naziv predmeta"
+                [ngModel]="predmet.naziv">
         </mat-form-field>
         <br>
         <mat-form-field style="width:100%;">

@@ -14,7 +14,7 @@ export class UceniciService {
     return this._http.get<Ucenici[]>("http://localhost:8080/api/ucenici")
   }
 
-  deleteStudent(id:number){
+  deleteUcenik(id:number){
     return this._http.delete("http://localhost:8080/api/ucenik/"+id);
   }
 

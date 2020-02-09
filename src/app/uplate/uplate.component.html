@@ -1,19 +1,27 @@
+<div *ngIf="loggedIn">
 <mat-list class="container">
-        
-        <mat-list-item *ngFor="let uplata of uplate">
-        
-                        <mat-icon mat-list-icon>
-                                assignment_ind
-                    </mat-icon>
-        <h4 mat-line>{{uplata.svrhaUplate}}  {{uplata.svrhaUplate}}</h4>
-        <p mat-line> {{uplata.datumUplate | date:'shortDate'}}</p>
-        <span class="example-spacer"></span>
-        <button mat-icon-button color="primary">
-          <mat-icon *ngIf="role=='administrator'" (click)="openPredmet(predmet)" aria-label="Example icon-button with a heart icon">list</mat-icon>
-        </button>
-  
-        
-       
-        </mat-list-item>
-        </mat-list>
-        
+    <button *ngIf="role!='ucenik'" class="margin-left" mat-flat-button color="primary" (click)="openDialog('add')">Nova Uplata</button>
+  <mat-list-item *ngFor="let uplata of uplate">
+    <mat-icon mat-list-icon> assignment </mat-icon>
+    <h4 mat-line>Svrha Uplate: {{uplata.svrhaUplate}}</h4>
+    <h4 mat-line>Iznos: {{uplata.iznos}} din</h4>
+    <p mat-line> {{uplata.datumUplate | date:'medium'}}</p>
+    <span class="example-spacer"></span>
+    <button mat-icon-button color="primary">
+      <mat-icon *ngIf="role=='administrator'" (click)="openPredmet(predmet)"
+        aria-label="Example icon-button with a heart icon">list</mat-icon>
+    </button>
+    <button mat-icon-button color="primary">
+      <mat-icon *ngIf="role=='administrator'" aria-label="Example icon-button with a heart icon" (click)="openDialog('edit',uplata)">edit</mat-icon>
+    </button>
+    <button mat-icon-button color="primary">
+      <mat-icon *ngIf="role=='administrator'" aria-label="Example icon-button with a heart icon" (click)="deleteUplate(uplata.uplataId)">delete
+      </mat-icon>
+    </button>
+
+  </mat-list-item>
+</mat-list>
+</div>
+<div *ngIf="!loggedIn">
+  morate biti ulogavani
+</div>

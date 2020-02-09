@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from '../security/authentication.service';
 import { SnackBarService } from '../services/snack-bar.service';
+import { error } from 'protractor';
 @Component({
   selector: 'app-predmeti',
   templateUrl: './predmeti.component.html',
@@ -19,20 +20,36 @@ export class PredmetiComponent implements OnInit {
   constructor(private predmetiService: PredmetiService,
     private dialog: MatDialog,
     private router: Router,
+    private authService: AuthenticationService,
    
     private snackBarService: SnackBarService) { }
 
   predmeti: Predmeti[];
   loggedIn: boolean = false;
   role: string;
+  predmetiKojePohadja: Predmeti[];
   ngOnInit(): void {
 
-    this.ucitavanjePredmeta();
-    
+    this.loggedIn= this.authService.isLoggedIn();
+    this.role= this.authService.getRole();
+    if(this.role == "ucenik"){
+     
+      this.predmetiKojePohadjaUcenik();
+    }if(this.role == "nastavnik")
+      this.predmetKojiPredaje();
+    if(this.role == "administrator")
     this.getAll();
 
   }
 
+  predmetKojiPredaje(){
+
+
+    this.predmetiService.getPredmeteKojePredaje().subscribe(
+      success => {this.predmetiKojePohadja= success;
+      error => console.log(error)},
+    )
+  }
 
   openDialog(mode: string, predmet: Predmeti = <Predmeti>{}) {
     const dialogRef = this.dialog.open(PredmetDialog, {
@@ -44,6 +61,13 @@ export class PredmetiComponent implements OnInit {
         this.getAll();
       }
     })
+  }
+
+  predmetiKojePohadjaUcenik(){
+    this.predmetiService.getPredmeteKojePohadja().subscribe(
+      success => { this.predmetiKojePohadja= success;
+      error => console.log(error)},
+    )
   }
   ucitavanjePredmeta() {
 

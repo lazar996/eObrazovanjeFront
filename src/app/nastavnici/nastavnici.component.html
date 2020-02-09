@@ -1,3 +1,4 @@
+<div *ngIf="loggedIn">
 <mat-list class="container">
     
         <button class="margin-left" mat-flat-button color="primary" (click)="openNastDialog('add')">Novi nastavnik</button>   
@@ -20,3 +21,7 @@
         </button>
     </mat-list-item>
 </mat-list>
+</div>
+<div *ngIf="!loggedIn">
+morate biti ulogovani
+</div>

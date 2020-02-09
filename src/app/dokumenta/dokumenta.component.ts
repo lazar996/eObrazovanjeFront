@@ -3,10 +3,14 @@ import { DokumentaService } from '../services/dokumenta.service';
 import { Dokument } from '../interface/Dokumenta';
 import { Ucenici } from '../interface/ucenici';
 import { UceniciService } from '../services/ucenici.service';
-import { error } from 'util';
+
 import { MatDialog } from '@angular/material';
 import {DokumentDialog} from '../dialogs/dokument.dialog'
 import { SnackBarService } from '../services/snack-bar.service';
+import { AuthenticationService } from '../security/authentication.service';
+import {saveAs} from "file-saver";
+import { error } from 'protractor';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-dokumenta',
   templateUrl: './dokumenta.component.html',
@@ -17,14 +21,37 @@ export class DokumentaComponent implements OnInit {
   constructor(private dokumentaService:DokumentaService,
               private uceniciService:UceniciService,
               private snackBarService:SnackBarService,
+              private authService: AuthenticationService,
               public dialog: MatDialog) { }
   dokumenti:Dokument[];
   ucenici: Ucenici[];
-
+  loggedIn: boolean= false;
+  role: string;
   ngOnInit() {
-
+    this.loggedIn = this.authService.isLoggedIn();
+    this.role = this.authService.getRole();
+   
     this.ucitavanjeDokumenata();
     this.ucitavanjeUcenika();
+    console.log(this.ucitavanjeDokumenata())
+  }
+
+
+  downloadDokumenta(fileName: string){
+    console.log("download file...")
+    
+    this.dokumentaService.downloadFile(fileName).subscribe(
+      success=> {
+        var blob = new Blob([success]);
+        console.log(blob)
+        saveAs(blob, fileName.split("/")[1])
+       
+      },error=> {
+        console.log("ne moze sa skine file")
+      }
+    )
+
+
   }
 
   openDialog(): void{

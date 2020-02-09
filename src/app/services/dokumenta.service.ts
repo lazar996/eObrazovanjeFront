@@ -25,4 +25,9 @@ export class DokumentaService {
   deleteDoc(id:number){
     return this._http.delete("http://localhost:8080/api/dokument/"+id);
   }
+
+  downloadFile(fileName: string){
+    console.log(fileName)
+    return this._http.get("http://localhost:8080/api/download/"+fileName, {responseType: 'blob'});
+  }
 }

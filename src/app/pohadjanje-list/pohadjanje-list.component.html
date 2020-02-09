@@ -1,0 +1,59 @@
+<div *ngIf="loggedIn">
+<mat-tab-group animationDuration="1000ms" mat-align-tabs="center" *ngIf="!idNotFound">
+    
+  
+  <mat-tab label="Ucenici">
+    
+    <button mat-flat-button color="primary" (click)="openUcenikDialog()">Novo pohadjanje</button>  
+      <mat-list   class="container">
+        
+        <mat-list-item *ngFor="let ucenik of ucenici">
+          <mat-icon mat-list-icon>
+            account_circle
+          </mat-icon>
+          <h4 mat-line>{{ucenik.brojIndeksa}}</h4>
+          <p mat-line>{{ucenik.ime}}  {{ucenik.prezime}}</p>
+          <span class="example-spacer"></span>
+          <button mat-icon-button color="primary">
+            <mat-icon (click)="deletePohadja(ucenik.jmbg)" aria-label="Example icon-button with a heart icon">delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+  
+      <br>
+  
+        
+  
+    </mat-tab>
+
+    <mat-tab label="Nastavnici">
+      <button mat-flat-button color="primary" (click)="openNastavnikDialog()">Novi nastavnik</button> 
+        <mat-list class="container">
+        
+          <mat-list-item *ngFor="let nastavnik of  nastavnici">
+            <mat-icon mat-list-icon>
+              book
+            </mat-icon>
+            <h4 mat-line>{{nastavnik.zvanje}}</h4>
+            <p mat-line>{{nastavnik.ime}}  {{nastavnik.prezime}}</p>
+            <span class="example-spacer"></span>
+            <button mat-icon-button color="primary">
+              <mat-icon (click)="deletePredaje(nastavnik.jmbg)" aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+    
+        <br>
+    
+          
+      </mat-tab>
+    </mat-tab-group>
+    
+    <br>
+    <div *ngIf="idNotFound">
+      Nesto nije u redu!
+    </div>
+  </div>
+  <div *ngIf="!loggedIn">
+    morate biti ulogavani1
+  </div>

@@ -31,7 +31,23 @@ export class KorisniciService {
     return this._http.delete("http://localhost:8080/api/nastavnici/"+id);
   }
 
+  getByPredmetId(id){
+    
+    return this._http.get<Ucenici[]>('http://localhost:8080/api/ucenik/'+id);
+   
+  }
+  getNastavnikByPredmetId(id){
 
-
+    return this._http.get<Nastavnici[]>('http://localhost:8080/api/nastavnik/'+id);
+  }
   
+
+  UceniciBezKursa(predmetId){
+    return this._http.get<Ucenici[]>('http://localhost:8080/api/ucenici/new/'+predmetId)
+  }
+
+  newNastavnik(predmetId){
+
+    return this._http.get<Nastavnici[]>('http://localhost:8080/api/nastavnik/new/'+predmetId)
+  }
 }

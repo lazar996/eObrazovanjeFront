@@ -27,6 +27,15 @@ export class PredmetiService {
   }
   
   deletePredmet(predmet:Predmeti){
-    return this._http.delete('http://localhost:8080/api/predmeti/'+predmet.predmetId);
+    return this._http.delete("http://localhost:8080/api/predmeti/"+predmet.predmetId);
+  }
+
+  getPredmeteKojePohadja(){
+    return this._http.get<Predmeti[]>("http://localhost:8080/api/ucenikPohadja")
+  }
+
+  getPredmeteKojePredaje(){
+
+    return this._http.get<Predmeti[]>("http://localhost:8080/api/nastavnikPredaje")
   }
 }

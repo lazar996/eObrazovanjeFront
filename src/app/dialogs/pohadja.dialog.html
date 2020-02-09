@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Pohadja</h1>
+<form #pohadjaForm="ngForm" (submit)="forumSubmit(pohadjaForm.value)">
+    <div mat-dialog-content>
+        <mat-form-field style="width:100%;">
+            <mat-select name="jmbg" ngModel placeholder="Izaberi studenta" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let ucenik of ucenici" [value]="ucenik.jmbg">
+                    {{ucenik.ime}} {{ucenik.prezime}} {{ucenik.brojIndeksa}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+
+
+        <button type="submit" [disabled]="!pohadjaForm.valid" color="primary" mat-flat-button>
+            Potvrdi
+        </button>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-button type="button" (click)="onNoClick()">Odustani</button>
+
+    </div>
+</form>

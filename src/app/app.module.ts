@@ -21,6 +21,14 @@ import { NastavnikDialog } from './dialogs/nastavnik.dialog';
 import { UcenikDialog } from './dialogs/ucenik.dialog';
 import { DokumentDialog } from './dialogs/dokument.dialog';
 import { UplateComponent } from './uplate/uplate.component';
+import { UplateDialog} from './dialogs/uplate.dialog';
+import { PohadjanjepredmetaComponent} from './pohadjanjepredmeta/pohadjanjepredmeta.component';
+import { PohadjanjeListComponent } from './pohadjanje-list/pohadjanje-list.component';
+import { PohadjaDialog } from './dialogs/pohadja.dialog';
+import { PredajeDialog } from './dialogs/predaje.dialog';
+import { PolaganjePredmetaComponent } from './polaganje-predmeta/polaganje-predmeta.component';
+import { PolaganjeDialog } from './dialogs/polaganje.dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +43,14 @@ import { UplateComponent } from './uplate/uplate.component';
     PredmetDialog,
     NastavnikDialog,
     UcenikDialog,
-    DokumentDialog
+    DokumentDialog,
+    UplateDialog,
+    PohadjanjepredmetaComponent,
+    PohadjanjeListComponent,
+    PohadjaDialog,
+    PredajeDialog,
+    PolaganjePredmetaComponent,
+    PolaganjeDialog
   ],
   imports: [
     BrowserModule,
@@ -46,7 +61,7 @@ import { UplateComponent } from './uplate/uplate.component';
     FormsModule
   ],
   entryComponents:[LoginDialog
-    ,PasswordDialog,PredmetDialog,NastavnikDialog,UcenikDialog,DokumentDialog],
+    ,PasswordDialog,PredmetDialog,NastavnikDialog,UcenikDialog,DokumentDialog,UplateDialog,PohadjaDialog,PredajeDialog,PolaganjeDialog],
   providers:[DokumentaService,HttpClient,{
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,
